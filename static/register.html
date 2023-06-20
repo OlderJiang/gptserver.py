@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>注册</title>
+    <style>
+        /* CSS样式 */
+        .privacy-dialog {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .privacy-dialog p {
+            margin-bottom: 10px;
+        }
+
+        .privacy-dialog button {
+            margin-right: 10px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        .center-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 320px; /* 调整宽度 */
+            background-color: #fff;
+            padding: 80px;
+            border-radius: 8px;
+        }
+
+        .container h2 {
+            text-align: center;
+        }
+
+        .container form {
+            margin-top: 20px;
+        }
+
+        .container form input[type="text"],
+        .container form input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .container form input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .container form input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .container a {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #888;
+            text-decoration: none;
+        }
+
+          .privacy-dialog button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+  }
+
+  .privacy-dialog button:hover {
+    background-color: #45a049;
+  }
+    </style>
+</head>
+<script>
+    // JavaScript代码
+    // 当点击注册按钮时触发的函数
+    function showPrivacyDialog(event) {
+        event.preventDefault(); // 阻止表单默认提交行为
+        var privacyDialog = document.getElementById('privacyDialog');
+        privacyDialog.style.display = 'block';
+    }
+
+    // 当点击同意按钮时触发的函数
+    function agreePrivacy(event) {
+        event.preventDefault(); // 阻止表单默认提交行为
+        var privacyDialog = document.getElementById('privacyDialog');
+        privacyDialog.style.display = 'none';
+        document.getElementById('registerForm').submit(); // 提交注册表单
+    }
+
+    // 当点击不同意按钮时触发的函数
+    function disagreePrivacy() {
+        // 可以在这里进行其他处理，如显示警告消息等
+        var privacyDialog = document.getElementById('privacyDialog');
+        privacyDialog.style.display = 'none';
+    }
+</script>
+<body>
+    <div class="center-container">
+        <div class="container">
+            <h2>注册</h2>
+            <form id="registerForm" action="/register" method="POST">
+                <input type="text" name="username" placeholder="用户名" required><br>
+                <input type="password" name="password" placeholder="密码" required><br>
+                <input type="submit" value="注册" onclick="showPrivacyDialog(event)">
+                <span id="error-msg" style="color: red;"></span> <!-- 新增的错误信息显示位置 -->
+            </form>
+            <a href="/">返回登录</a>
+        </div>
+    </div>
+    <!-- 隐私条款对话框 -->
+    <div id="privacyDialog" class="privacy-dialog">
+        <!-- 显示隐私条款内容 -->
+        <p>您在本网站注册即同意：</p>
+<p>1. 我们将保护您提供的个人信息的隐私和安全。</p>
+<p>2. 我们仅在合法和必要的情况下收集、使用和存储您的个人账户信息。</p>
+<p>3. 您的账户信息将用于注册和登录等必要的服务功能，并在您同意的情况下用于提供个性化的服务和推荐内容。</p>
+<p>4. 我们将采取适当的安全措施来保护您的账户信息免受未经授权的访问、使用或泄露。</p>
+<p>5. 您有权访问、更正、删除或限制我们对您账户信息的处理，可以随时联系我们进行相关操作。</p>
+<p>请您在注册前仔细阅读并理解以上条款，如果您不同意其中任何一项，请不要继续注册。</p>
+
+        <button onclick="agreePrivacy(event)">同意</button>
+        <!-- 不同意按钮 -->
+        <button onclick="disagreePrivacy()">不同意</button>
+    </div>
+</body>
+</html>
